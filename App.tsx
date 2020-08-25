@@ -1,21 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import styled, { ThemeProvider } from "styled-components/native";
+import Clock from "./src/components/Clock";
+import { useColorScheme } from "react-native";
+import { darkTheme, lightTheme } from "./theme";
 
-export default function App() {
+const ScrollView = styled.ScrollView`
+  flex: 1;
+  background-color: ${({ theme }) => theme.bgColor};
+`;
+
+const SafeAreaView = styled.SafeAreaView`
+  flex: 1;
+  background-color: ${({ theme }) => theme.bgColor};
+`;
+
+const StatusBar = styled.StatusBar.attrs(({ theme }) => ({
+  barStyle: theme.style === "light" ? "light-content" : "dark-content",
+}))``;
+
+const App = () => {
+  const isDark = useColorScheme() === "dark";
+  //console.log({ isDark });
+  const theme = isDark ? darkTheme : lightTheme;
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ThemeProvider theme={theme}>
+      <StatusBar barStyle="light-content" />
+      <SafeAreaView>
+        <ScrollView
+          centerContent={true}
+          contentInsetAdjustmentBehavior="automatic"
+        >
+          <Clock />
+        </ScrollView>
+      </SafeAreaView>
+    </ThemeProvider>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
