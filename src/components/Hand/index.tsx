@@ -1,6 +1,6 @@
 import React from "react";
 import { Line } from "react-native-svg";
-import { polarToCartesian } from "../utils/geometry";
+import { polarToCartesian } from "../../utils/geometry";
 
 type Props = {
   center: number;

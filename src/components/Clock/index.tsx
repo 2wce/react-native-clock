@@ -1,26 +1,11 @@
 import React, { useState } from "react";
 import Svg from "react-native-svg";
 import { Dimensions } from "react-native";
-import styled from "styled-components/native";
-import ClockMarkings from "./ClockMarkings";
-import Hand from "./Hand";
-import { getTime } from "../utils/time";
-import { useInterval } from "../utils/useInterval";
+import ClockMarkings from "../ClockMarkings";
 
-const Seconds = styled(Hand).attrs(({ theme }) => ({
-  stroke: theme.accentColor,
-  strokeOpacity: "1",
-}))``;
-
-const Minutes = styled(Hand).attrs(({ theme }) => ({
-  stroke: theme.primaryColor,
-  strokeOpacity: "0.5",
-}))``;
-
-const Hours = styled(Hand).attrs(({ theme }) => ({
-  stroke: theme.primaryColor,
-  strokeOpacity: "0.8",
-}))``;
+import { getTime } from "../../utils/time";
+import { useInterval } from "../../utils/useInterval";
+import { Seconds, Minutes, Hours } from "./styles";
 
 const { width } = Dimensions.get("window");
 const diameter = width - 40;
